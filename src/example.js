@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Select, { components } from "react-select";
-import { colourOptions } from "./docs/data";
+import { groupedOptions } from "./docs/data";
 
 const controlStyles = {
   padding: "10px",
@@ -14,20 +14,31 @@ const containerStyles = {
   border: "1px solid #ccc",
   borderRadius: `5px`
 };
+
+const groupStyles = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between"
+};
+
 const MultiValueContainer = props => null;
 
 const ClearIndicator = props => null;
 
+const formatGroupLabel = data => (
+  <div style={groupStyles}>
+    <span>Icon cua tao</span>
+    <span>{data.label}</span>
+  </div>
+);
+
 export default () => {
   let selectRef;
 
-  const ControlComponent = (props, innerRef) => {
-    const inputRef = React.createRef();
+  const ControlComponent = props => {
     useEffect(() => {
-      // if (isShown) inputRef.current.focus();
-      // if(isShown) selectRef.current.focus();
       if (isShown) selectRef.focus();
-    }, [inputRef]);
+    });
 
     const selectedValue = props
       .getValue()
@@ -36,7 +47,7 @@ export default () => {
 
     return (
       <React.Fragment>
-        <section ref={inputRef} onBlur={() => setIsShown(false)}>
+        <section onBlur={() => setIsShown(false)}>
           <section onClick={() => setIsShown(!isShown)} style={containerStyles}>
             <input style={controlStyles} value={selectedValue} />
             <div class=" css-1wy0on6">
@@ -82,8 +93,9 @@ export default () => {
         IndicatorSeparator: ClearIndicator
       }}
       isMulti
-      options={colourOptions}
+      options={groupedOptions}
       menuIsOpen={isShown}
+      formatGroupLabel={formatGroupLabel}
       ref={ref => {
         selectRef = ref;
       }}
