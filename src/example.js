@@ -3,14 +3,16 @@ import Select, { components } from "react-select";
 import { colourOptions } from "./docs/data";
 
 const controlStyles = {
-  padding: "5px",
+  padding: "10px",
   flexGrow: "2",
-  border: "none"
+  border: "none",
+  textOverflow: "ellipsis"
 };
 
 const containerStyles = {
   display: "flex",
-  border: "1px solid #ccc"
+  border: "1px solid #ccc",
+  borderRadius: `5px`
 };
 const MultiValueContainer = props => null;
 
